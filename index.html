@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secret Key Discovery Challenge</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@400;600;900&display=swap');
         
         * {
             margin: 0;
@@ -21,31 +21,48 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow-x: hidden;
             position: relative;
         }
         
         .container {
-            max-width: 800px;
+            max-width: 900px;
             text-align: center;
             padding: 2rem;
             z-index: 10;
+            margin: 40px 20px;
         }
         
         h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
             position: relative;
             display: inline-block;
+            background: linear-gradient(to right, #ff7e5f, #feb47b, #7cffcb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
         }
         
         h1::after {
             content: "🔐";
             position: absolute;
-            right: -50px;
+            right: -60px;
             top: 0;
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             animation: bounce 2s infinite;
+        }
+        
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: #7cffcb;
+            margin: 2rem 0 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         
         p {
@@ -54,48 +71,94 @@
             line-height: 1.6;
         }
         
+        .intro {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
         .features {
             display: flex;
             justify-content: space-around;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             flex-wrap: wrap;
         }
         
         .feature {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            border-radius: 10px;
-            padding: 1.5rem;
+            border-radius: 15px;
+            padding: 1.8rem;
             margin: 1rem;
-            width: 200px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 240px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .feature:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-15px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.4);
         }
         
         .feature-icon {
-            font-size: 2rem;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            animation: pulse 3s infinite;
+        }
+        
+        .feature h3 {
             margin-bottom: 1rem;
+            font-size: 1.3rem;
+            color: #feb47b;
+        }
+        
+        .how-to-play {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .how-to-play ol {
+            text-align: left;
+            margin: 1.5rem 0 1.5rem 2rem;
+        }
+        
+        .how-to-play li {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .how-to-play li span {
+            color: #7cffcb;
+            font-weight: bold;
         }
         
         .play-button {
             display: inline-block;
             background: linear-gradient(90deg, #ff7e5f, #feb47b);
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: bold;
-            padding: 1rem 2.5rem;
+            padding: 1.2rem 3rem;
             border-radius: 50px;
             text-decoration: none;
-            margin-top: 2rem;
+            margin-top: 2.5rem;
             transition: transform 0.3s, box-shadow 0.3s;
             position: relative;
             overflow: hidden;
             z-index: 1;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            font-family: 'Orbitron', sans-serif;
         }
         
         .play-button::before {
@@ -105,14 +168,15 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             transition: left 0.7s;
             z-index: -1;
         }
         
         .play-button:hover {
             transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
         
         .play-button:hover::before {
@@ -124,6 +188,55 @@
             font-size: 2rem;
             opacity: 0.3;
             animation: float 15s linear infinite;
+        }
+        
+        .difficulty-section {
+            margin: 3rem 0;
+            text-align: center;
+        }
+        
+        .difficulty-levels {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        
+        .difficulty-level {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin: 1rem;
+            width: 200px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .difficulty-level h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .easy {
+            color: #4caf50;
+        }
+        
+        .medium {
+            color: #ff9800;
+        }
+        
+        .hard {
+            color: #f44336;
+        }
+        
+        .artifacts-section {
+            margin: 3rem 0;
+            text-align: center;
+        }
+        
+        .glowing-text {
+            text-shadow: 0 0 10px #7cffcb, 0 0 20px #7cffcb, 0 0 30px #7cffcb;
+            font-weight: bold;
+            color: #fff;
         }
         
         @keyframes float {
@@ -148,7 +261,7 @@
                 transform: translateY(0);
             }
             50% {
-                transform: translateY(-10px);
+                transform: translateY(-15px);
             }
         }
         
@@ -157,7 +270,7 @@
                 transform: scale(1);
             }
             50% {
-                transform: scale(1.05);
+                transform: scale(1.1);
             }
         }
         
@@ -165,14 +278,65 @@
             animation: pulse 2s infinite;
         }
         
+        .neon-border {
+            position: relative;
+        }
+        
+        .neon-border::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, #ff7e5f, #feb47b, #7cffcb, #ff7e5f);
+            background-size: 400% 400%;
+            z-index: -1;
+            filter: blur(15px);
+            border-radius: 20px;
+            animation: neon 10s ease infinite;
+            opacity: 0.6;
+        }
+        
+        @keyframes neon {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        .final-challenge {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem auto;
+            border: 1px solid #7cffcb;
+            max-width: 700px;
+        }
+        
+        .final-challenge p {
+            color: #feb47b;
+            font-size: 1.3rem;
+            font-style: italic;
+        }
+        
         @media (max-width: 768px) {
             h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
             
             h1::after {
-                right: -40px;
-                font-size: 2rem;
+                right: -45px;
+                font-size: 2.2rem;
+            }
+            
+            .intro {
+                font-size: 1.2rem;
             }
             
             .features {
@@ -182,7 +346,27 @@
             
             .feature {
                 width: 100%;
-                max-width: 300px;
+                max-width: 320px;
+                margin-bottom: 1.5rem;
+            }
+            
+            .difficulty-levels {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .difficulty-level {
+                width: 100%;
+                max-width: 320px;
+                margin-bottom: 1rem;
+            }
+            
+            .how-to-play {
+                padding: 1.5rem;
+            }
+            
+            .how-to-play li {
+                font-size: 1rem;
             }
         }
     </style>
@@ -190,50 +374,78 @@
 <body>
     <div class="container">
         <h1>Secret Key Discovery</h1>
-        <p>Embark on an exciting journey of puzzles, riddles, and logic challenges to discover the hidden secret key. Each correct answer brings you one step closer to unlocking the mystery!</p>
+        <p class="intro">Embark on an exciting journey of puzzles, riddles, and logic challenges to discover the hidden secret key. Each correct answer brings you one step closer to unlocking the ultimate mystery!</p>
         
         <div class="features">
             <div class="feature">
                 <div class="feature-icon">🧩</div>
                 <h3>Brain Teasers</h3>
-                <p>Challenge yourself with logic puzzles and riddles</p>
+                <p>Challenge yourself with logic puzzles and riddles that test your critical thinking skills</p>
             </div>
             <div class="feature">
                 <div class="feature-icon">🔄</div>
                 <h3>Progressive Hints</h3>
-                <p>Each correct answer unlocks new clues</p>
+                <p>Each correct answer unlocks valuable artifacts with clues to the final secret</p>
             </div>
             <div class="feature">
                 <div class="feature-icon">🏆</div>
                 <h3>Final Reward</h3>
-                <p>Discover the secret key and claim victory</p>
+                <p>Piece together all the clues to uncover the ultimate secret and claim victory</p>
             </div>
         </div>
         
-        <a href="https://last-bot-standing.streamlit.app/" class="play-button pulse">PLAY NOW</a>
-    </div>
-    
-    <script>
-        function createFloatingKeys() {
-            const keySymbols = ['🔑', '🗝️', '🔐', '🔏', '🔒'];
-            const numKeys = 20;
-            
-            for (let i = 0; i < numKeys; i++) {
-                const key = document.createElement('div');
-                key.className = 'floating-keys';
-                key.textContent = keySymbols[Math.floor(Math.random() * keySymbols.length)];
-          
-                key.style.left = `${Math.random() * 100}vw`;
-                key.style.animationDuration = `${15 + Math.random() * 10}s`;
-                key.style.animationDelay = `${Math.random() * 5}s`;
-                
-                document.body.appendChild(key);
-            }
-        }
-
-        window.onload = function() {
-            createFloatingKeys();
-        };
-    </script>
-</body>
-</html>
+        <div class="how-to-play neon-border">
+            <h2>HOW TO PLAY</h2>
+            <ol>
+                <li>Each level presents you with a <span>riddle or puzzle</span> to solve.</li>
+                <li>If a riddle is too difficult, you can <span>try another one</span> within the same level or <span>skip the level</span> entirely.</li>
+                <li>For each level you complete, you'll collect an <span>artifact</span> containing a valuable clue.</li>
+                <li>Each level offers riddles of varying difficulty: <span class="easy">Easy</span>, <span class="medium">Medium</span>, and <span class="hard">Hard</span>.</li>
+                <li>The more artifacts you collect, the easier the <span>final challenge</span> will be to solve.</li>
+                <li>Stuck on a puzzle? The game will provide <span>mystic guidance</span> to help point you in the right direction.</li>
+                <li>Your goal is to determine the <span>secret word</span> that connects all the artifacts in the final challenge.</li>
+            </ol>
+        </div>
+        
+        <div class="difficulty-section">
+            <h2>DIFFICULTY LEVELS</h2>
+            <div class="difficulty-levels">
+                <div class="difficulty-level">
+                    <h4 class="easy">EASY</h4>
+                    <p>Straightforward questions with direct answers</p>
+                </div>
+                <div class="difficulty-level">
+                    <h4 class="medium">MEDIUM</h4>
+                    <p>Require some creative thinking and abstract connections</p>
+                </div>
+                <div class="difficulty-level">
+                    <h4 class="hard">HARD</h4>
+                    <p>Complex riddles that test your problem-solving abilities</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="artifacts-section">
+            <h2>COLLECTING ARTIFACTS</h2>
+            <p>Each completed level rewards you with a precious artifact containing part of the final answer.</p>
+            <p>Collect all three artifacts to have the best chance at solving the final challenge!</p>
+        </div>
+        
+        <div class="final-challenge">
+            <h2>THE FINAL CHALLENGE</h2>
+            <p>With the knowledge from your collected artifacts, you'll face the ultimate test: uncovering the secret word that unites all the clues.</p>
+            <p class="glowing-text">Only the most observant and clever puzzle-solvers will discover the hidden truth!</p>
+        </div>
+        
+        <a href="https://last-bot-standing.streamlit.app/" class="play-button pulse">START THE ADVENTURE</a>
+        
+        <!-- Floating keys background animation -->
+        <div class="floating-keys" style="left: 10%; animation-duration: 17s;">🔑</div>
+        <div class="floating-keys" style="left: 30%; animation-duration: 21s; animation-delay: 2s;">🗝</div>
+        <div class="floating-keys" style="left: 50%; animation-duration: 19s; animation-delay: 5s;">🔐</div>
+        <div class="floating-keys" style="left: 70%; animation-duration: 23s; animation-delay: 1s;">🔓</div>
+        <div class="floating-keys" style="left: 90%; animation-duration: 18s; animation-delay: 3s;">🔑</div>
+        
+        </div>
+        </body>
+        </html>
